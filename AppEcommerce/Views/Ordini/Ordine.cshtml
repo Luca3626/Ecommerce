@@ -1,0 +1,68 @@
+﻿@model IEnumerable<DettaglioOrdine>
+<div class="container" style="margin-top:80px">
+    <main>
+        <div class="row g-5">
+            <div class="col-md-10 col-lg-9" style="margin:auto">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-primary">I tuoi ordini</span>
+                    <span class="badge bg-primary rounded-pill">@Model.Count()</span>
+                </h4>
+               @foreach (DettaglioOrdine dettaglio in Model)
+                {
+
+                    Carrello? carrello = dettaglio.DettagliCarrello;
+                    string totale = $"{carrello!.GetTotal():F2}";
+                    <div>
+                        <h6 class="my-0">data ordine:@dettaglio.Data </h6>
+                     </div>
+                    <ul class="list-group mb-5">
+                        @foreach (var item in carrello.ProdottiSel!)
+                        {
+                            <li class="list-group-item d-flex justify-content-between lh-sm">
+
+                                <div>
+                                    <h6 class="my-0">@item.Nome</h6>
+                                    <small class="text-body-secondary">@item.Descrizione</small>
+
+                                </div>
+                                <span class="text-body-secondary">&euro;@item.Prezzo</span>&nbsp;&nbsp;
+                                <span class="text-body-secondary"><input id="qs" name="qs" type="number" value="@item.Qs" readonly /></span>&nbsp;
+                                
+                            </li>
+                        }
+                  
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Totale</span>
+                            <strong>&euro;@totale</strong>
+                        </li>
+                    </ul>
+                }
+            
+
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="my-5 pt-5 text-body-secondary text-center text-small">
+        <p class="mb-1">&copy; 2017–2024 Company Name</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+</div>
+@section Scripts {
+    <script>
+        function edit(idprodotto) {
+            let form = `form_aggiorna_${idprodotto}`
+            console.log(form)
+            let form_aggiorna = document.getElementById(form);
+            form_aggiorna.submit();
+        }
+
+
+    </script>
+
+}
