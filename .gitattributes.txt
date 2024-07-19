@@ -1,0 +1,3 @@
+AppEcommerce/Views/*.html linguist-vendored
+AppEcommerce/Views/**/*.html linguist-vendored
+AppEcommerce/Views/**/*.cshtml linguist-vendored
